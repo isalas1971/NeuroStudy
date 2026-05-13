@@ -719,7 +719,10 @@ export function TeacherDashboard() {
   const teacherDisplayName = (rawTeacherName && !rawTeacherName.includes("@"))
     ? rawTeacherName
     : user?.email?.split("@")[0] ?? "Docente"
-  const teacherFirstName = teacherDisplayName.split(" ")[0]
+  const nameParts = teacherDisplayName.split(" ")
+  const teacherFirstName = nameParts[0].endsWith(".") && nameParts.length > 1
+    ? nameParts.slice(1).join(" ")
+    : nameParts[0]
 
   return (
     <div className="min-h-screen bg-background">
