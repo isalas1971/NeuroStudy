@@ -49,7 +49,7 @@ export function Header({ title = "NeuroStudy" }: HeaderProps) {
               variant="ghost"
               size="icon"
               className="h-9 w-9 rounded-full relative"
-              aria-label="Notifications"
+              aria-label="Notificaciones"
               onClick={() => setNotificationsOpen(true)}
             >
               <Bell className="h-5 w-5" />
@@ -60,14 +60,14 @@ export function Header({ title = "NeuroStudy" }: HeaderProps) {
                 variant="ghost"
                 size="icon"
                 className="h-9 w-9 rounded-full"
-                aria-label="Settings"
+                aria-label="Ajustes"
               >
                 <Settings className="h-5 w-5" />
               </Button>
             </Link>
             <Link href="/profile">
               <Avatar className="h-9 w-9 border-2 border-transparent hover:border-primary/20 transition-colors cursor-pointer">
-                <AvatarImage src={user?.profilePicture || undefined} alt={user?.name || "Profile"} />
+                <AvatarImage src={user?.profilePicture || undefined} alt={user?.name || "Perfil"} />
                 <AvatarFallback className="text-xs bg-primary/10 text-primary">
                   {user?.name ? getInitials(user.name) : "?"}
                 </AvatarFallback>

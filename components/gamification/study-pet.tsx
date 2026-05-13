@@ -124,7 +124,7 @@ export function StudyPet({ compact = false }: StudyPetProps) {
               </h3>
               
               <p className="text-sm text-muted-foreground">
-                Level {pet.level} {pet.type.charAt(0).toUpperCase() + pet.type.slice(1)}
+                Nivel {pet.level} {pet.type.charAt(0).toUpperCase() + pet.type.slice(1)}
               </p>
               
               {/* Happiness bar */}

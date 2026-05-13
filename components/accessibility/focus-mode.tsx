@@ -19,17 +19,17 @@ export function FocusModeToggle() {
         "gap-2",
         settings.focusMode && "bg-primary/80"
       )}
-      aria-label={settings.focusMode ? "Exit focus mode" : "Enter focus mode"}
+      aria-label={settings.focusMode ? "Salir del modo foco" : "Activar modo foco"}
     >
       {settings.focusMode ? (
         <>
           <EyeOff className="h-4 w-4" />
-          Exit Focus
+          Salir del Foco
         </>
       ) : (
         <>
           <Eye className="h-4 w-4" />
-          Focus Mode
+          Modo Foco
         </>
       )}
     </Button>

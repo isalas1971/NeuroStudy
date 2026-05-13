@@ -17,40 +17,40 @@ interface ScheduleItem {
 const getScheduleItems = (): ScheduleItem[] => {
   const now = new Date()
   const currentHour = now.getHours()
-  
+
   return [
     {
       id: "1",
       time: `${currentHour}:00`,
-      title: "Current Study Session",
+      title: "Sesión de Estudio Actual",
       type: "study",
       duration: "25 min",
     },
     {
       id: "2",
       time: `${currentHour}:25`,
-      title: "Short Break",
+      title: "Descanso Corto",
       type: "break",
       duration: "5 min",
     },
     {
       id: "3",
       time: `${currentHour}:30`,
-      title: "Math Homework",
+      title: "Tarea de Matemáticas",
       type: "task",
       duration: "45 min",
     },
     {
       id: "4",
       time: `${currentHour + 1}:15`,
-      title: "Long Break",
+      title: "Descanso Largo",
       type: "break",
       duration: "15 min",
     },
     {
       id: "5",
       time: `${currentHour + 1}:30`,
-      title: "Science Reading",
+      title: "Lectura de Ciencias",
       type: "study",
       duration: "30 min",
     },
@@ -103,7 +103,7 @@ export function WhatsNext({ showFull = false }: WhatsNextProps) {
           settings.dyslexiaMode && "tracking-wide"
         )}>
           <Clock className="h-4 w-4 text-primary" />
-          {"What's Coming Up"}
+          {"¿Qué viene después?"}
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -150,7 +150,7 @@ export function WhatsNext({ showFull = false }: WhatsNextProps) {
                 
                 {isFirst && (
                   <span className="text-xs px-2 py-0.5 bg-primary text-primary-foreground rounded-full">
-                    Now
+                    Ahora
                   </span>
                 )}
                 
@@ -162,7 +162,7 @@ export function WhatsNext({ showFull = false }: WhatsNextProps) {
         
         {!showFull && scheduleItems.length > 3 && (
           <p className="text-xs text-muted-foreground text-center mt-3">
-            +{scheduleItems.length - 3} more items today
+            +{scheduleItems.length - 3} elementos más hoy
           </p>
         )}
       </CardContent>

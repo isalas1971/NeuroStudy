@@ -23,41 +23,41 @@ const mockNotifications: Notification[] = [
   {
     id: "1",
     type: "reminder",
-    title: "Study Reminder",
-    message: "Time for your daily Math practice! You're on a 7-day streak.",
-    time: "5 min ago",
+    title: "Recordatorio de Estudio",
+    message: "¡Es hora de tu práctica diaria de Matemáticas! Llevás una racha de 7 días.",
+    time: "Hace 5 min",
     read: false,
   },
   {
     id: "2",
     type: "exam",
-    title: "Upcoming Exam",
-    message: "Chemistry exam in 3 days. Would you like to review your notes?",
-    time: "1 hour ago",
+    title: "Examen Próximo",
+    message: "Examen de Química en 3 días. ¿Querés repasar tus apuntes?",
+    time: "Hace 1 hora",
     read: false,
   },
   {
     id: "3",
     type: "gentle",
-    title: "Friendly Check-in",
-    message: "You haven't studied today yet. Even 10 minutes can help!",
-    time: "2 hours ago",
+    title: "Recordatorio Amigable",
+    message: "Todavía no estudiaste hoy. ¡Incluso 10 minutos ayudan!",
+    time: "Hace 2 horas",
     read: false,
   },
   {
     id: "4",
     type: "achievement",
-    title: "Achievement Unlocked!",
-    message: "You completed 5 study sessions this week. Great job!",
-    time: "Yesterday",
+    title: "¡Logro Desbloqueado!",
+    message: "Completaste 5 sesiones de estudio esta semana. ¡Excelente trabajo!",
+    time: "Ayer",
     read: true,
   },
   {
     id: "5",
     type: "info",
-    title: "New Feature",
-    message: "Try the new focus mode in settings for distraction-free studying.",
-    time: "2 days ago",
+    title: "Nueva Función",
+    message: "Probá el nuevo modo foco en ajustes para estudiar sin distracciones.",
+    time: "Hace 2 días",
     read: true,
   },
 ]
@@ -116,7 +116,7 @@ export function NotificationsPanel({ isOpen, onClose }: NotificationsPanelProps)
                 "text-lg font-semibold",
                 settings.dyslexiaMode && "tracking-wide"
               )}>
-                Notifications
+                Notificaciones
               </h2>
               {unreadCount > 0 && (
                 <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
@@ -132,7 +132,7 @@ export function NotificationsPanel({ isOpen, onClose }: NotificationsPanelProps)
                   onClick={markAllAsRead}
                   className="text-xs"
                 >
-                  Mark all read
+                  Marcar todo leído
                 </Button>
               )}
               <Button variant="ghost" size="icon" onClick={onClose}>
@@ -146,8 +146,8 @@ export function NotificationsPanel({ isOpen, onClose }: NotificationsPanelProps)
             {notifications.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-12 text-center">
                 <CheckCircle2 className="h-12 w-12 text-muted-foreground/50 mb-3" />
-                <p className="text-muted-foreground">All caught up!</p>
-                <p className="text-sm text-muted-foreground/70">No new notifications</p>
+                <p className="text-muted-foreground">¡Todo al día!</p>
+                <p className="text-sm text-muted-foreground/70">Sin notificaciones nuevas</p>
               </div>
             ) : (
               notifications.map((notification) => {
@@ -212,7 +212,7 @@ export function NotificationsPanel({ isOpen, onClose }: NotificationsPanelProps)
           {/* Footer */}
           <div className="border-t border-border p-4">
             <Button variant="outline" className="w-full gap-2">
-              Notification Settings
+              Ajustes de Notificaciones
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>

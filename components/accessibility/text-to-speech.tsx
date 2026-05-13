@@ -81,7 +81,7 @@ export function TextToSpeech({ text, className, showLabel = false }: TextToSpeec
           isSpeaking && !isPaused && "text-primary",
           settings.dyslexiaMode && "tracking-wide"
         )}
-        aria-label={isSpeaking ? (isPaused ? "Resume" : "Pause") : "Read aloud"}
+        aria-label={isSpeaking ? (isPaused ? "Reanudar" : "Pausar") : "Leer en voz alta"}
       >
         {isSpeaking ? (
           isPaused ? (
@@ -94,18 +94,18 @@ export function TextToSpeech({ text, className, showLabel = false }: TextToSpeec
         )}
         {showLabel && (
           <span className="text-xs">
-            {isSpeaking ? (isPaused ? "Resume" : "Pause") : "Read aloud"}
+            {isSpeaking ? (isPaused ? "Reanudar" : "Pausar") : "Leer en voz alta"}
           </span>
         )}
       </Button>
-      
+
       {isSpeaking && (
         <Button
           variant="ghost"
           size="sm"
           onClick={handleStop}
           className="h-8 w-8 p-0"
-          aria-label="Stop reading"
+          aria-label="Detener lectura"
         >
           <VolumeX className="h-4 w-4" />
         </Button>
