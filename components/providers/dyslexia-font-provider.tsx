@@ -11,15 +11,15 @@ const FONT_CLASSES = [
 ]
 
 export function DyslexiaFontProvider() {
-  const { settings } = useAccessibility()
+  const { settings, hasCompletedOnboarding } = useAccessibility()
 
   useEffect(() => {
     const root = document.documentElement
     root.classList.remove(...FONT_CLASSES)
-    if (settings.useDyslexicFont && settings.dyslexiaFont) {
+    if (hasCompletedOnboarding && settings.useDyslexicFont && settings.dyslexiaFont) {
       root.classList.add(`dyslexic-font-${settings.dyslexiaFont}`)
     }
-  }, [settings.useDyslexicFont, settings.dyslexiaFont])
+  }, [hasCompletedOnboarding, settings.useDyslexicFont, settings.dyslexiaFont])
 
   return null
 }
