@@ -194,7 +194,7 @@ export function SchoolView() {
 
     const { data: space } = await supabase
       .from("teacher_spaces")
-      .select("id, school_name, subject_name, space_code")
+      .select("id, school_name, subject_name, space_code, teacher_id")
       .eq("space_code", code)
       .single()
 
@@ -209,8 +209,19 @@ export function SchoolView() {
 
     if (error) { setJoinError("No se pudo unir al espacio. Intentá nuevamente."); setIsJoining(false); return }
 
+    // Fetch teacher name for the success message
+    let teacherLabel = ""
+    if (space.teacher_id) {
+      const { data: teacherProfile } = await supabase
+        .from("user_profiles")
+        .select("name")
+        .eq("id", space.teacher_id)
+        .single()
+      if (teacherProfile?.name) teacherLabel = ` con ${teacherProfile.name}`
+    }
+
     setSpaces((prev) => [...prev, { space_id: space.id, school_name: space.school_name, subject_name: space.subject_name, space_code: space.space_code }])
-    setJoinSuccess(`¡Te uniste a ${space.subject_name} — ${space.school_name}!`)
+    setJoinSuccess(`¡Te uniste a ${space.subject_name} — ${space.school_name}${teacherLabel}!`)
     setJoinCode("")
     setShowJoinInput(false)
     setIsJoining(false)
