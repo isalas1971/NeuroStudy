@@ -218,7 +218,18 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
       try { setSettings(prev => ({ ...prev, ...JSON.parse(stored) })) } catch { /* usa defaults */ }
     }
     if (storedGamification) {
-      try { setGamification(prev => ({ ...prev, ...JSON.parse(storedGamification) })) } catch { /* usa defaults */ }
+      try {
+        const parsed = JSON.parse(storedGamification)
+        // Merge stored owned/consumable state onto current defaultPetItems (preserves translated names)
+        if (parsed?.pet?.items) {
+          const storedById = new Map(parsed.pet.items.map((i: PetItem) => [i.id, i]))
+          parsed.pet.items = defaultPetItems.map(item => {
+            const s = storedById.get(item.id) as PetItem | undefined
+            return s ? { ...item, owned: s.owned } : item
+          })
+        }
+        setGamification(prev => ({ ...prev, ...parsed }))
+      } catch { /* usa defaults */ }
     }
     setHasCompletedOnboarding(onboarded === "true")
     setIsLoaded(true)
@@ -254,9 +265,16 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
               type: (petData?.pet_type ?? prev.pet.type) as StudyPet["type"],
               level: petData?.level ?? prev.pet.level,
               happiness: petData?.happiness ?? prev.pet.happiness,
-              items: Array.isArray(petData?.items) && petData.items.length > 0
-                ? petData.items as PetItem[]
-                : prev.pet.items,
+              items: (() => {
+                const src: PetItem[] = Array.isArray(petData?.items) && petData.items.length > 0
+                  ? petData.items as PetItem[]
+                  : prev.pet.items
+                const byId = new Map(src.map(i => [i.id, i]))
+                return defaultPetItems.map(item => {
+                  const s = byId.get(item.id)
+                  return s ? { ...item, owned: s.owned } : item
+                })
+              })(),
             },
           }))
         }
