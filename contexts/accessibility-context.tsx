@@ -431,6 +431,8 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
   const resetOnboarding = async () => {
     setHasCompletedOnboarding(false)
     localStorage.removeItem("neurostudy-onboarded")
+    // Reset font so onboarding screen shows in standard typography
+    setSettings((prev) => ({ ...prev, useDyslexicFont: false, dyslexiaFont: "opendyslexic" }))
     if (user && supabase) {
       await supabase
         .from("user_profiles")
