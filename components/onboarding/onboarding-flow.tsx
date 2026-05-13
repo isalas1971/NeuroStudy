@@ -92,14 +92,18 @@ export function OnboardingFlow() {
     if (step === 0) {
       setStep(1)
     } else if (step === 1) {
-      updateProfile(selectedProfile)
+      if (!isDyslexia) {
+        updateProfile(selectedProfile)
+      }
       if (isDyslexia) {
         setStep(2)
       } else {
         setStep(3)
       }
     } else if (step === 2) {
-      // Font selection step (only when dyslexia)
+      // Font selection step (only when dyslexia) — apply profile here so global font
+      // doesn't override the preview cards during selection
+      updateProfile(selectedProfile)
       updateSetting("dyslexiaFont", selectedFont)
       updateSetting("useDyslexicFont", true)
       setStep(3)
