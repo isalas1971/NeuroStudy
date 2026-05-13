@@ -551,6 +551,43 @@ export function SettingsView() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Créditos */}
+      <Card className="border-border/50 bg-muted/20">
+        <CardHeader className="pb-3 text-center">
+          <CardTitle className={cn("text-base font-semibold", settings.dyslexiaMode && "tracking-wide")}>
+            Créditos
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="pb-6">
+          <div className="space-y-4 text-center">
+            <div>
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-1">Creadoras</p>
+              <p className={cn("text-sm text-foreground leading-relaxed", settings.dyslexiaMode && "tracking-wide")}>
+                Olivia Salas Cravero<br />
+                Mia Cutillo<br />
+                Juana Giammarini<br />
+                Delfina Navarro
+              </p>
+            </div>
+            <div className="border-t border-border/50 pt-4">
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-1">Profesora</p>
+              <p className={cn("text-sm text-foreground", settings.dyslexiaMode && "tracking-wide")}>
+                Julieta Echart
+              </p>
+            </div>
+            <div className="border-t border-border/50 pt-4">
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-1">Colegio</p>
+              <p className={cn("text-sm text-foreground", settings.dyslexiaMode && "tracking-wide")}>
+                Santa María de Luján
+              </p>
+            </div>
+            <p className="text-xs text-muted-foreground/60 pt-2 tracking-widest font-light">
+              MMXXVI
+            </p>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }
