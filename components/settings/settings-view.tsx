@@ -177,6 +177,26 @@ export function SettingsView() {
               </div>
             )
           })}
+
+          {/* Sin preferencia — desactiva todos los modos */}
+          {(() => {
+            const noneActive = !settings.adhdMode && !settings.dyslexiaMode && !settings.autismMode
+            return (
+              <button
+                onClick={() => updateProfile("none")}
+                className={cn(
+                  "w-full flex items-center justify-between p-4 rounded-xl border-2 transition-all text-left",
+                  "bg-muted/50 border-muted hover:border-muted-foreground/20",
+                  noneActive && "ring-2 ring-primary ring-offset-2"
+                )}
+              >
+                <span className={cn("font-medium text-foreground", settings.dyslexiaMode && "tracking-wide")}>
+                  Sin preferencia — configuración por defecto
+                </span>
+                {noneActive && <Check className="h-5 w-5 text-primary shrink-0" />}
+              </button>
+            )
+          })()}
         </CardContent>
       </Card>
 
