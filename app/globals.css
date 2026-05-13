@@ -1,0 +1,333 @@
+/* Dyslexia-friendly fonts — must be first */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* NeuroStudy - Default color palette */
+:root, .theme-default {
+  --background: #f5f8fa;
+  --foreground: #1b3a5c;
+  --card: #ffffff;
+  --card-foreground: #1b3a5c;
+  --popover: #ffffff;
+  --popover-foreground: #1b3a5c;
+  --primary: #4191a8;
+  --primary-foreground: #ffffff;
+  --secondary: #ddeef5;
+  --secondary-foreground: #1b3a5c;
+  --muted: #eef4f8;
+  --muted-foreground: #5a7a8c;
+  --accent: #c5dded;
+  --accent-foreground: #1b3a5c;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #d0e8f0;
+  --input: #eef4f8;
+  --ring: #4191a8;
+  --chart-1: #4191a8;
+  --chart-2: #1b3a5c;
+  --chart-3: #c5dded;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+  --radius: 0.75rem;
+  --sidebar: #f5f8fa;
+  --sidebar-foreground: #1b3a5c;
+  --sidebar-primary: #4191a8;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ddeef5;
+  --sidebar-accent-foreground: #1b3a5c;
+  --sidebar-border: #d0e8f0;
+  --sidebar-ring: #4191a8;
+}
+
+/* Light palette - warm beige tones */
+.theme-light {
+  --background: #F4F1DE;
+  --foreground: #4A4A4A;
+  --card: #ffffff;
+  --card-foreground: #4A4A4A;
+  --popover: #ffffff;
+  --popover-foreground: #4A4A4A;
+  --primary: #A7BBC7;
+  --primary-foreground: #2d3748;
+  --secondary: #BFD8B8;
+  --secondary-foreground: #2d5a47;
+  --muted: #E6E8EB;
+  --muted-foreground: #6b7280;
+  --accent: #BFD8B8;
+  --accent-foreground: #2d5a47;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #d4d6d9;
+  --input: #E6E8EB;
+  --ring: #A7BBC7;
+  --chart-1: #A7BBC7;
+  --chart-2: #BFD8B8;
+  --chart-3: #E6E8EB;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+  --sidebar: #F4F1DE;
+  --sidebar-foreground: #4A4A4A;
+  --sidebar-primary: #A7BBC7;
+  --sidebar-primary-foreground: #2d3748;
+  --sidebar-accent: #BFD8B8;
+  --sidebar-accent-foreground: #2d5a47;
+  --sidebar-border: #d4d6d9;
+  --sidebar-ring: #A7BBC7;
+}
+
+/* Dark palette - muted greens and blues */
+.theme-dark {
+  --background: #2F3E46;
+  --foreground: #CAD2C5;
+  --card: #354F52;
+  --card-foreground: #CAD2C5;
+  --popover: #354F52;
+  --popover-foreground: #CAD2C5;
+  --primary: #52796F;
+  --primary-foreground: #CAD2C5;
+  --secondary: #1B263B;
+  --secondary-foreground: #CAD2C5;
+  --muted: #354F52;
+  --muted-foreground: #9ca3af;
+  --accent: #52796F;
+  --accent-foreground: #CAD2C5;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #52796F;
+  --input: #354F52;
+  --ring: #52796F;
+  --chart-1: #52796F;
+  --chart-2: #84a98c;
+  --chart-3: #CAD2C5;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+  --sidebar: #2F3E46;
+  --sidebar-foreground: #CAD2C5;
+  --sidebar-primary: #52796F;
+  --sidebar-primary-foreground: #CAD2C5;
+  --sidebar-accent: #354F52;
+  --sidebar-accent-foreground: #CAD2C5;
+  --sidebar-border: #52796F;
+  --sidebar-ring: #52796F;
+}
+
+/* OpenDyslexic font support */
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/woff/OpenDyslexic-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/woff/OpenDyslexic-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Dyslexia font options */
+.dyslexic-font-opendyslexic,
+.dyslexic-font-opendyslexic * {
+  font-family: 'OpenDyslexic', sans-serif !important;
+  letter-spacing: 0.05em;
+  word-spacing: 0.12em;
+  line-height: 1.8;
+}
+
+.dyslexic-font-lexend,
+.dyslexic-font-lexend * {
+  font-family: 'Lexend', sans-serif !important;
+  letter-spacing: 0.03em;
+  word-spacing: 0.08em;
+  line-height: 1.7;
+}
+
+.dyslexic-font-arial,
+.dyslexic-font-arial * {
+  font-family: Arial, sans-serif !important;
+  letter-spacing: 0.04em;
+  word-spacing: 0.1em;
+  line-height: 1.7;
+}
+
+.dyslexic-font-helvetica,
+.dyslexic-font-helvetica * {
+  font-family: Helvetica, Arial, sans-serif !important;
+  letter-spacing: 0.04em;
+  word-spacing: 0.1em;
+  line-height: 1.7;
+}
+
+/* Reduced motion preference */
+.reduced-motion,
+.reduced-motion * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Word highlighting for dyslexia mode */
+.word-highlight {
+  background-color: rgba(74, 144, 164, 0.2);
+  padding: 0.1em 0.2em;
+  border-radius: 0.2em;
+  transition: background-color 0.3s ease;
+}
+
+.word-highlight.active {
+  background-color: rgba(74, 144, 164, 0.4);
+}
+
+/* Focus mode overlay */
+.focus-mode-active {
+  position: relative;
+}
+
+.focus-mode-active::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.03);
+  pointer-events: none;
+  z-index: 1;
+}
+
+@theme inline {
+  --font-sans: Helvetica, Arial, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --font-dyslexic: 'OpenDyslexic', sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Safe area support for devices with notches/home indicators */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent content from being cut off */
+.overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Ensure proper text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark mode contrast overrides — fix light-colored hardcoded elements */
+.theme-dark .bg-amber-50\/30,
+.theme-dark .bg-amber-50\/50 {
+  background-color: rgba(120, 80, 0, 0.15) !important;
+}
+.theme-dark .border-amber-200 {
+  border-color: rgba(180, 120, 0, 0.4) !important;
+}
+.theme-dark .text-amber-800 {
+  color: #fbbf24 !important;
+}
+.theme-dark .text-amber-600 {
+  color: #f59e0b !important;
+}
+.theme-dark .bg-sky-50\/30,
+.theme-dark .bg-sky-50\/50 {
+  background-color: rgba(0, 80, 140, 0.15) !important;
+}
+.theme-dark .border-sky-200 {
+  border-color: rgba(0, 140, 200, 0.4) !important;
+}
+.theme-dark .text-sky-800 {
+  color: #38bdf8 !important;
+}
+.theme-dark .bg-green-50\/50,
+.theme-dark .bg-green-100\/50 {
+  background-color: rgba(0, 80, 40, 0.2) !important;
+}
+.theme-dark .border-green-200 {
+  border-color: rgba(0, 160, 80, 0.4) !important;
+}
+.theme-dark .text-green-700,
+.theme-dark .text-green-800 {
+  color: #4ade80 !important;
+}
+.theme-dark .text-green-600 {
+  color: #86efac !important;
+}
+.theme-dark .bg-emerald-50\/30,
+.theme-dark .bg-emerald-50\/50 {
+  background-color: rgba(0, 80, 60, 0.15) !important;
+}
+.theme-dark .border-emerald-200 {
+  border-color: rgba(0, 160, 100, 0.4) !important;
+}
+.theme-dark .text-emerald-800 {
+  color: #34d399 !important;
+}
+/* Fix white backgrounds in forms when in dark mode */
+.theme-dark .bg-white {
+  background-color: var(--card) !important;
+}
+.theme-dark .bg-amber-50 {
+  background-color: var(--card) !important;
+}
+
