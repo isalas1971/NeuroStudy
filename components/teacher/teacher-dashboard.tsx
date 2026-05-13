@@ -69,38 +69,7 @@ function groupBySchool(spaces: TeacherSpace[]): Record<string, TeacherSpace[]> {
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
 
-function StudentsTab({ spaceId, supabase }: { spaceId: string; supabase: ReturnType<typeof getSupabaseClient> }) {
-  const [students, setStudents] = useState<SpaceStudent[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    if (!supabase) { setIsLoading(false); return }
-    setIsLoading(true)
-    const load = async () => {
-      const { data: memberships } = await supabase
-        .from("space_memberships")
-        .select("id, student_id, joined_at")
-        .eq("space_id", spaceId)
-      if (!memberships?.length) { setStudents([]); setIsLoading(false); return }
-
-      const ids = memberships.map((m) => m.student_id)
-      const { data: profiles } = await supabase
-        .from("user_profiles")
-        .select("id, name")
-        .in("id", ids)
-
-      const profileMap = Object.fromEntries((profiles ?? []).map((p) => [p.id, p.name]))
-      setStudents(memberships.map((m) => ({
-        membership_id: m.id,
-        student_id: m.student_id,
-        name: profileMap[m.student_id] ?? "Alumno",
-        joined_at: m.joined_at,
-      })))
-      setIsLoading(false)
-    }
-    load()
-  }, [spaceId, supabase])
-
+function StudentsTab({ students, isLoading }: { students: SpaceStudent[]; isLoading: boolean }) {
   if (isLoading) return <div className="flex justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-muted-foreground" /></div>
 
   if (students.length === 0) {
@@ -543,7 +512,7 @@ function SpaceDetail({ space, onBack, supabase, teacherId }: {
 }) {
   const [copied, setCopied] = useState(false)
   const [students, setStudents] = useState<SpaceStudent[]>([])
-  const [studentsLoaded, setStudentsLoaded] = useState(false)
+  const [studentsLoading, setStudentsLoading] = useState(true)
 
   const copyCode = () => {
     navigator.clipboard.writeText(space.space_code)
@@ -552,23 +521,28 @@ function SpaceDetail({ space, onBack, supabase, teacherId }: {
   }
 
   const loadStudents = useCallback(async () => {
-    if (!supabase || studentsLoaded) return
+    if (!supabase) { setStudentsLoading(false); return }
+    setStudentsLoading(true)
     const { data: memberships } = await supabase
       .from("space_memberships")
       .select("id, student_id, joined_at")
       .eq("space_id", space.id)
-    if (!memberships?.length) { setStudentsLoaded(true); return }
+    if (!memberships?.length) { setStudents([]); setStudentsLoading(false); return }
     const ids = memberships.map((m) => m.student_id)
-    const { data: profiles } = await supabase.from("user_profiles").select("id, name").in("id", ids)
-    const profileMap = Object.fromEntries((profiles ?? []).map((p) => [p.id, p.name]))
+
+    // Use server-side API to resolve names (falls back to email prefix)
+    const res = await fetch("/api/students", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ids }) })
+    const { students: resolved } = res.ok ? await res.json() : { students: [] as { id: string; name: string }[] }
+    const nameMap = Object.fromEntries((resolved as { id: string; name: string }[]).map((s) => [s.id, s.name]))
+
     setStudents(memberships.map((m) => ({
       membership_id: m.id,
       student_id: m.student_id,
-      name: profileMap[m.student_id] ?? "Alumno",
+      name: nameMap[m.student_id] ?? "Alumno",
       joined_at: m.joined_at,
     })))
-    setStudentsLoaded(true)
-  }, [supabase, space.id, studentsLoaded])
+    setStudentsLoading(false)
+  }, [supabase, space.id])
 
   useEffect(() => { loadStudents() }, [loadStudents])
 
@@ -613,7 +587,7 @@ function SpaceDetail({ space, onBack, supabase, teacherId }: {
         </div>
 
         <TabsContent value="students">
-          <StudentsTab spaceId={space.id} supabase={supabase} />
+          <StudentsTab students={students} isLoading={studentsLoading} />
         </TabsContent>
         <TabsContent value="tasks">
           <TasksTab spaceId={space.id} supabase={supabase} teacherId={teacherId} students={students} />
