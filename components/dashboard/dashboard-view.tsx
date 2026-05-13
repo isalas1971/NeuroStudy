@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Timer, Flame, Star, MessageSquare } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
@@ -31,6 +32,7 @@ export function DashboardView() {
   const { user } = useSupabaseAuth()
   const supabase = getSupabaseClient()
   const [teacherMsgs, setTeacherMsgs] = useState<TeacherMsg[]>([])
+  const [petModalOpen, setPetModalOpen] = useState(false)
 
   const loadMsgs = useCallback(async () => {
     if (!user || !supabase) return
@@ -233,7 +235,13 @@ export function DashboardView() {
               "hidden sm:block",
               settings.simplifiedUI && "hidden"
             )}>
-              <StudyPet compact />
+              <button
+                onClick={() => setPetModalOpen(true)}
+                className="focus:outline-none hover:opacity-80 transition-opacity"
+                aria-label="Ver mascota"
+              >
+                <StudyPet compact />
+              </button>
             </div>
           </div>
         </CardContent>
@@ -304,6 +312,14 @@ export function DashboardView() {
           </CardContent>
         </Card>
       )}
+      <Dialog open={petModalOpen} onOpenChange={setPetModalOpen}>
+        <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Mi Mascota de Estudio</DialogTitle>
+          </DialogHeader>
+          <StudyPet />
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
